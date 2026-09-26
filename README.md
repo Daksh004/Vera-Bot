@@ -11,7 +11,7 @@ two-step pipeline:
    sent to the LLM, which returns body/cta/rationale as JSON. A post-check
    verifies every number in the message exists in the key facts sheet before
    it's sent — if not, the LLM is asked to redo it once, citing a source.
-3. 3. **Fallback (no LLM available or all drafts rejected):** rather than a
+3. **Fallback (no LLM available or all drafts rejected):** rather than a
    generic template, the fallback is built from the same verified fields —
    the merchant's active offer, locality, or category — so even a failed
    LLM call never produces a message with fabricated content.
