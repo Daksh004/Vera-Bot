@@ -11,6 +11,16 @@ two-step pipeline:
    sent to the LLM, which returns body/cta/rationale as JSON. A post-check
    verifies every number in the message exists in the key facts sheet before
    it's sent — if not, the LLM is asked to redo it once, citing a source.
+3. 3. **Fallback (no LLM available or all drafts rejected):** rather than a
+   generic template, the fallback is built from the same verified fields —
+   the merchant's active offer, locality, or category — so even a failed
+   LLM call never produces a message with fabricated content.
+
+Every number, price or date must either appear in the merchant/category/
+trigger data given to the bot, or (if it's a background fact, like a
+regulation or industry study) the message must name its exact source in
+the same sentence. A message is rejected and retried once if it cites a
+number that isn't traceable either way.
 
 Replies are handled with simple rules first (yes/stop/auto-reply/hostile),
 falling back to the same fact-checked LLM path for anything else. Auto-reply
